@@ -4,7 +4,9 @@ var ctx = canvas.getContext('2d');
 var sketch = document.getElementById('sketch');
 var sketch_style = getComputedStyle(sketch);
 canvas.width = window.innerWidth - 90;
-canvas.height = 2000;
+canvas.height = 4000;
+ctx.lineWidth = 8;
+drawPages();
 
 var mouse = {x: 0, y: 0};
 
@@ -17,7 +19,21 @@ canvas.addEventListener('mousemove', function (e) {
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 
-ctx.strokeStyle = "red";
+ctx.strokeStyle = "black";
+
+function drawPages() {
+  ctx.strokeStyle = "#e6e6e6"
+  ctx.lineWidth = 6;
+  ctx.setLineDash([10, 5]);
+  for (var i = 1; i <= 3; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0,1000 * i);
+    ctx.lineTo(window.innerWidth - 90,1000 * i);
+    ctx.stroke();
+  }
+  ctx.lineWidth = 8;
+  ctx.setLineDash([]);
+}
 
 function getColor(colour) {
     ctx.strokeStyle = colour;
@@ -42,3 +58,15 @@ var onPaint = function () {
     ctx.lineTo(mouse.x, mouse.y);
     ctx.stroke();
 };
+
+download.addEventListener("click", function () {
+  html2canvas($("#sketch"),{
+    onrendered:function(canvas){
+        var pdf=new jsPDF("p", "mm", "a4");
+        var width = pdf.internal.pageSize.width;
+        var height = pdf.internal.pageSize.height;
+        pdf.addImage(canvas, 'JPEG', 0, 0,width,height);
+        pdf.save('sketch.pdf');
+    }
+  });
+}, false);
