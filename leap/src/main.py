@@ -2,8 +2,14 @@ import sys
 
 sys.path.insert(0, "../lib")
 import Leap
+import select
 
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
+
+is_calibrated = False
+corners = []
+origin = None
+dimension = None
 
 
 class SampleListener(Leap.Listener):
@@ -14,18 +20,42 @@ class SampleListener(Leap.Listener):
         frame = controller.frame()
         fingers = frame.fingers
         index = None
+        pos = None
         if not fingers.is_empty:
             index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
-            index = index[0]
-            
+            index = Leap.Finger(index[0])
+            pos = index.tip_position
+            if not is_calibrated:
+                calibrate(pos)
+            else:
+                refresh(pos)
 
-        if frame.id %30 == 0:
-            print(index)
+
+def calibrate(pos):
+    if select.select([sys.stdin, ], [], [], 0.0)[0]:
+        sys.stdin.readline()
+        corners.append(pos)
+
+    if len(corners) == 4:
+        global is_calibrated
+        is_calibrated = True
+
+        global origin
+        origin_x = corners[0][1]
+        origin_y = - corners[0][2]
+        origin = [origin_x, origin_y]
+
+        global dimension
+        X = corners[2][1] - origin_x
+        Y = -corners[2][2] - origin_y
+        dimension = [X, Y]
 
 
-                #print(len(list(fingers)))
-                #finger = list(fingers)[0]
-                #print(finger)
+def refresh(pos):
+    x = pos[1]
+    y = -pos[2]
+    
+
 
 """
     def on_frame(self, controller):
@@ -62,6 +92,8 @@ class SampleListener(Leap.Listener):
             print "Frame id: %d, type: %s, hands: %d, X: %d, Y: %d, Z: %d" % (frame.id, type, len(frame.hands), x, y, z)
             print "Number: %d, Index z: %d, Z: %d" %(len(fingers), z_i, z)
 """
+
+
 def main():
     # Create a sample listener and controller
     listener = SampleListener()
@@ -71,15 +103,8 @@ def main():
     # Have the sample listener receive events from the controller
     controller.add_listener(listener)
 
-    # Keep this process running until Enter is pressed
-    print "Press Enter to quit..."
-    try:
-        sys.stdin.readline()
-    except KeyboardInterrupt:
+    while True:
         pass
-    finally:
-        # Remove the sample listener when done
-        controller.remove_listener(listener)
 
 
 if __name__ == "__main__":
