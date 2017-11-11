@@ -3,13 +3,28 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSRect frameRect = NSMakeRect(100, 100 , 256, 256);
-        NSView* inputView = [[InputDetector alloc] initWithFrame:frameRect];
+        [NSApplication sharedApplication];
+        NSUInteger windowStyle = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable;
+
+        NSRect windowRect = NSMakeRect(100, 100, 400, 400);
+        NSWindow* window = [[NSWindow alloc] initWithContentRect:windowRect
+                                                        styleMask:windowStyle
+                                                          backing:NSBackingStoreBuffered
+                                                            defer:YES];
+    
+        NSView* inputView = [[InputDetector alloc] initWithFrame:windowRect];
         [inputView setHidden:NO];
         [inputView setNeedsDisplay:YES];
+        [window setContentView:inputView];
+        [window setAcceptsMouseMovedEvents:YES];
+
+        [window makeKeyAndOrderFront:NSApp];
         
-        NSWindow *myWindow = [[NSWindow alloc] initWithContentRect:NSMakeRect(100,100,256,256) styleMask:NSWindowStyleMaskTitled backing:NSBackingStoreBuffered defer:NO];
-        [myWindow setContentView:inputView];
+        NSLog(@"%hhd", [window acceptsMouseMovedEvents]);
+
+        [NSApp run];
+        
+        NSLog(@"Closing touchpad input");
     }
     return 0;
 }
