@@ -12,12 +12,40 @@ class SampleListener(Leap.Listener):
 
     def on_frame(self, controller):
         frame = controller.frame()
-        pointables = frame.pointables
-        front_finger = Leap.Finger(pointables.frontmost)
+        fingers = frame.fingers
+        if not fingers.is_empty:
+            F = []
+            for i in list(fingers):
+                F.append(list(i))
+        if frame.id %30 == 0:
+            if not fingers.is_empty:
+                for i in list(fingers):
+                    finger = Leap.Finger(i)
+                    print(finger.tip_position)
+                    print "NUM: %d, Y: %d" % (len(list(fingers)), 0)
+
+                #print(len(list(fingers)))
+                #finger = list(fingers)[0]
+                #print(finger)
+            else:
+                print(len(list(fingers)))
+"""
+    def on_frame(self, controller):
+        frame = controller.frame()
+        fingers = frame.fingers
+        front_finger = Leap.Finger(fingers.frontmost)
         foremost = front_finger.joint_position(3)
+        index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
+        if len(index) > 0:
+            index_finger = index[0]
+            x_i = index_finger.x
+            z_i = index_finger.z
+        else:
+            z_i = 0
         x = foremost.x
         y = foremost.y
         z = foremost.z
+
         if front_finger.type == 0:
             type = "thumb"
         elif front_finger.type == 1:
@@ -34,12 +62,13 @@ class SampleListener(Leap.Listener):
 
         if frame.id %30 == 0:
             print "Frame id: %d, type: %s, hands: %d, X: %d, Y: %d, Z: %d" % (frame.id, type, len(frame.hands), x, y, z)
-
-
+            print "Number: %d, Index z: %d, Z: %d" %(len(fingers), z_i, z)
+"""
 def main():
     # Create a sample listener and controller
     listener = SampleListener()
     controller = Leap.Controller()
+    controller.set_policy(Leap.Controller.POLICY_OPTIMIZE_HMD)
 
     # Have the sample listener receive events from the controller
     controller.add_listener(listener)
