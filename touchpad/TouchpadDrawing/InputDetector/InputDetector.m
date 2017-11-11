@@ -9,41 +9,41 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     [self setAllowedTouchTypes:YES];
-    NSLog(@"%lu", (unsigned long)[self allowedTouchTypes]);
     [self setWantsRestingTouches:YES];
-    [self becomeFirstResponder];
     [self setWantsRestingTouches:YES];
+    
+    
+    
+    [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^(NSEvent * mouseEvent) {
+        CGPoint pos = [mouseEvent locationInWindow];
+        [self refresh:pos];
+    }];
+    
     return self;
 }
 
-- (void)touchesBeganWithEvent:(NSEvent *)event {
-    NSSet *touches = [event touchesMatchingPhase:NSTouchPhaseBegan inView:self];
-    for(NSTouch *touch in touches) {
-        NSPoint normalizedPosition = touch.normalizedPosition;
-        
-        //points inside `normalizedPosition`
-        //top center: (.5, 1), bottom left: (1, 0)
-    }
-    NSLog(@"HELLOOOO");
-}
-- (void)touchesMovedWithEvent:(NSEvent *)event {
-    NSLog(@"HELLOOOO");
+- (void)refresh:(CGPoint)pos {
+    int x = pos.x;
+    int y = pos.y;
+    
+    [self send:CGPointMake(x, y)];
 }
 
-- (void)touchesEndedWithEvent:(NSEvent *)event {
-    NSLog(@"HELLOOOO");
-
-}
-- (void)touchesCancelledWithEvent:(NSEvent *)event {
-    NSLog(@"HELLOOOO");
+- (void)send:(CGPoint)pos {
+    int x = pos.x;
+    NSLog(@"%@", NSStringFromPoint(pos));
 }
 
 - (void)pressureChangeWithEvent:(NSEvent *)event {
     //NSLog(@"Pressure changed");
 }
 
--(void)mouseDown:(NSEvent *)theEvent {
-    NSLog(@"MouseDown in NSView");
+- (void)rotateWithEvent:(NSEvent *)event {
+    NSLog(@"HELLOOOO");
+}
+
+- (void)scrollWheel:(NSEvent *)theEvent {
+    //NSLog(@"user scrolled %f horizontally and %f vertically", [theEvent deltaX], [theEvent deltaY]);
 }
 
 @end

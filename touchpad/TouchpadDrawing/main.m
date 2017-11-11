@@ -13,8 +13,8 @@ int main(int argc, const char * argv[]) {
                                                             defer:YES];
     
         NSView* inputView = [[InputDetector alloc] initWithFrame:windowRect];
-        [inputView setHidden:NO];
-        [inputView setNeedsDisplay:YES];
+        [inputView setHidden:YES];
+        [inputView setNeedsDisplay:NO];
         [window setContentView:inputView];
         [window setAcceptsMouseMovedEvents:YES];
 
