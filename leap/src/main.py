@@ -13,7 +13,6 @@ dimension = None
 is_hand_present = False
 
 
-
 class SampleListener(Leap.Listener):
     def on_connect(self, controller):
         print "Connected"
@@ -34,11 +33,10 @@ class SampleListener(Leap.Listener):
             is_hand_present = True
             print "HAND DETECTED"
 
-
         if not fingers.is_empty:
             index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
             index = Leap.Finger(index[0])
-            tip_pos = index.tip_position
+            tip_pos = index.stabilized_tip_position
             if not is_calibrated:
                 calibrate(tip_pos)
             else:
@@ -47,10 +45,13 @@ class SampleListener(Leap.Listener):
 
 
 def calibrate(pos):
+    global corners
+
     if select.select([sys.stdin, ], [], [], 0.0)[0]:
         sys.stdin.readline()
         corners.append(pos)
-        print "CALIBRATED CORNERS: %i" %len(corners)
+        print "CALIBRATED CORNERS: %i, CORNER %i: X: %i Y: %i" % (len(corners), len(corners), corners[-1][0], corners[-1][1])
+
 
     if len(corners) == 4:
         global is_calibrated
@@ -64,21 +65,28 @@ def calibrate(pos):
 
         global dimension
         X = corners[2][1] - origin_x
+        X1 = corners[1][1] - origin_x
+
         Y = -corners[2][2] - origin_y
-        dimension = [X, Y]
+        Y1 = -corners[3][2] - origin_y
+        if abs(X - X1) > 10 or abs(Y - Y1) > 10\
+                :
+            corners = []
+            is_calibrated = False
+            print "RECALIBRATE"
+        else:
+            dimension = [X, Y]
         print "DIM X: %i, DIM Y: %s" % (X, Y)
 
 
 def refresh(tip_pos):
-    #print tip_pos
+    # print tip_pos
 
     x = tip_pos[1]
     y = -tip_pos[2]
-    X = max(0,min((x - origin[0])/dimension[0],1))
-    Y = max(0,min((y-origin[1])/dimension[1],1))
-    return [round(X,2),round(Y,2)]
-
-
+    X = max(0, min((x - origin[0]) / dimension[0], 1))
+    Y = max(0, min((y - origin[1]) / dimension[1], 1))
+    return [round(X, 2), round(Y, 2)]
 
 
 """
