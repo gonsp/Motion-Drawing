@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/javascripts/gest.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css" />
+  <script type="text/javascript" src="/javascripts/jquery.fullPage.js"></script>
 </head>
 <body>
-<button id="download">Download PDF</button>
-<div id="sketch">
-    <canvas id="paint" class="letter"></canvas>
-</div>
-<script src='/javascripts/index.js'></script>
-<script src='/javascripts/handscroll.js'></script>
+  <div id="fullpage">
+    <div class="section">
+    	<div class="slide"> <h1> 1 . 1</h1> </div>
+    	<div class="slide"> <h1> 1 . 2</h1> </div>
+    	<div class="slide"> <h1> 1 . 3</h1> </div>
+    	<div class="slide"> <h1> 1 . 4</h1> </div>
+    </div>
+    <div class="section">
+    	<div class="slide"> <h1> 2 . 1</h1> </div>
+    	<div class="slide"> <h1> 2 . 2</h1> </div>
+    	<div class="slide"> <h1> 2 . 3</h1> </div>
+    	<div class="slide"> <h1> 2 . 4</h1> </div>
+    </div>
+    <div class="section">
+    	<div class="slide"> Slide 1 </div>
+    	<div class="slide"> Slide 2 </div>
+    	<div class="slide"> Slide 3 </div>
+    	<div class="slide"> Slide 4 </div>
+    </div>
+    <div class="section">
+    	<div class="slide"> Slide 1 </div>
+    	<div class="slide"> Slide 2 </div>
+    	<div class="slide"> Slide 3 </div>
+    	<div class="slide"> Slide 4 </div>
+    </div>
+  </div>
+  <script src='/javascripts/handscroll.js'></script>
+  <script src='/javascripts/draw.js'></script>
 </body>
 </html>
