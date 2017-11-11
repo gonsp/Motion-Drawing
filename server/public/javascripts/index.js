@@ -3,8 +3,8 @@ var ctx = canvas.getContext('2d');
 
 var sketch = document.getElementById('sketch');
 var sketch_style = getComputedStyle(sketch);
-canvas.width = 5000;
-canvas.height = 5000;
+canvas.width = window.innerWidth - 40;
+canvas.height = 2000;
 
 var mouse = {x: 0, y: 0};
 
@@ -27,10 +27,6 @@ function getColor(colour) {
 function getSize(size) {
     ctx.lineWidth = size;
 }
-
-
-//ctx.strokeStyle =
-//ctx.strokeStyle = document.settings.colour[1].value;
 
 canvas.addEventListener('mousedown', function (e) {
     ctx.beginPath();
