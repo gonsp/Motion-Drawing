@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css'/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/javascripts/gest.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css" />
-  <script type="text/javascript" src="/javascripts/jquery.fullPage.js"></script>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/gest.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.fullPage.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css"/>
 </head>
 <body>
-  <div id="fullpage">
+<div id="fullpage">
     <div class="section">
-    	<div class="slide"> <h1> 1 . 1</h1> </div>
-    	<div class="slide"> <h1> 1 . 2</h1> </div>
-    	<div class="slide"> <h1> 1 . 3</h1> </div>
-    	<div class="slide"> <h1> 1 . 4</h1> </div>
+        <div class="slide"><h1> 1 . 1</h1></div>
+        <div class="slide"><h1> 1 . 2</h1></div>
+        <div class="slide"><h1> 1 . 3</h1></div>
+        <div class="slide"><h1> 1 . 4</h1></div>
     </div>
     <div class="section">
-    	<div class="slide"> <h1> 2 . 1</h1> </div>
-    	<div class="slide"> <h1> 2 . 2</h1> </div>
-    	<div class="slide"> <h1> 2 . 3</h1> </div>
-    	<div class="slide"> <h1> 2 . 4</h1> </div>
+        <div class="slide"><h1> 2 . 1</h1></div>
+        <div class="slide"><h1> 2 . 2</h1></div>
+        <div class="slide"><h1> 2 . 3</h1></div>
+        <div class="slide"><h1> 2 . 4</h1></div>
     </div>
     <div class="section">
-    	<div class="slide"> Slide 1 </div>
-    	<div class="slide"> Slide 2 </div>
-    	<div class="slide"> Slide 3 </div>
-    	<div class="slide"> Slide 4 </div>
+        <div class="slide"> Slide 1</div>
+        <div class="slide"> Slide 2</div>
+        <div class="slide"> Slide 3</div>
+        <div class="slide"> Slide 4</div>
     </div>
     <div class="section">
-    	<div class="slide"> Slide 1 </div>
-    	<div class="slide"> Slide 2 </div>
-    	<div class="slide"> Slide 3 </div>
-    	<div class="slide"> Slide 4 </div>
+        <div class="slide"> Slide 1</div>
+        <div class="slide"> Slide 2</div>
+        <div class="slide"> Slide 3</div>
+        <div class="slide"> Slide 4</div>
     </div>
-  </div>
-  <script src='/javascripts/handscroll.js'></script>
-  <script src='/javascripts/draw.js'></script>
+</div>
+<script src='/javascripts/handscroll.js'></script>
+<script src='/javascripts/draw.js'></script>
 </body>
 </html>
