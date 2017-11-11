@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+
+<div id="sketch">
+    <canvas id="paint"></canvas>
+</div>
+
+<div id="settings"> Colours
+    <button onclick="getColor('blue');">Blue</button>
+    <button onclick="getColor('red');">Red</button>
+    <button onclick="getColor('green');">Green</button>
+    <button onclick="getColor('white');">White</button>
+    <button onclick="getColor('#333333');">Eraser</button>
+</div>
+
+<div id="settings"> Brush Size
+    <button onclick="getSize('2');">Small</button>
+    <button onclick="getSize('5');">Med</button>
+    <button onclick="getSize('10');">Large</button>
+    <button onclick="getSize('20');">X Large</button>
+</div>
+<script src='/javascripts/index.js'></script>
+</body>
 </html>
