@@ -40,6 +40,7 @@ class SampleListener(Leap.Listener):
             index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
             index = Leap.Finger(index[0])
             tip_pos = index.stabilized_tip_position
+
             if not is_calibrated:
                 calibrate(tip_pos)
             else:
@@ -56,9 +57,7 @@ def calibrate(pos):
         sys.stdin.readline()
         corners.append(pos)
         print "CALIBRATED CORNERS: %i, CORNER %i: X: %i Y: %i" % \
-              (len(corners), len(corners), corners[-1][0], corners[-1][1])
-        print "CALIBRATED CORNERS: %i, CORNER %i: X: %i Y: %i" % \
-              (len(corners), len(corners), corners[-1][0], corners[-1][1])
+              (len(corners), len(corners), corners[-1][1], -corners[-1][2])
         socket.emit('calibrated-corners', {'num_corners': len(corners)})
 
     if len(corners) == 4:
