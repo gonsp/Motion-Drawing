@@ -4,8 +4,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface InputDetector : NSView {
-       
+    
 }
+
+- (id)initWithFrame:(NSRect)frame;
 
 @end
 

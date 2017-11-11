@@ -8,26 +8,42 @@
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
-    if (!self) return nil;
-    //[self allowedTouchTypes:YES];
+    [self setAllowedTouchTypes:YES];
+    NSLog(@"%lu", (unsigned long)[self allowedTouchTypes]);
+    [self setWantsRestingTouches:YES];
+    [self becomeFirstResponder];
     [self setWantsRestingTouches:YES];
     return self;
 }
 
-- (void)touchesBeganWithEvent:(NSEvent *)ev {
-    NSSet *touches = [ev touchesMatchingPhase:NSTouchPhaseBegan inView:self];
-    
-    for (NSTouch *touch in touches) {
-        /* Once you have a touch, getting the position is dead simple. */
-        NSPoint fraction = touch.normalizedPosition;
-        NSSize whole = touch.deviceSize;
-        NSPoint wholeInches = {whole.width / 72.0, whole.height / 72.0};
-        NSPoint pos = wholeInches;
-        pos.x *= fraction.x;
-        pos.y *= fraction.y;
-        NSLog(@"%s: Finger is touching %g inches right and %g inches up "
-              @"from lower left corner of trackpad.", __func__, pos.x, pos.y);
+- (void)touchesBeganWithEvent:(NSEvent *)event {
+    NSSet *touches = [event touchesMatchingPhase:NSTouchPhaseBegan inView:self];
+    for(NSTouch *touch in touches) {
+        NSPoint normalizedPosition = touch.normalizedPosition;
+        
+        //points inside `normalizedPosition`
+        //top center: (.5, 1), bottom left: (1, 0)
     }
+    NSLog(@"HELLOOOO");
+}
+- (void)touchesMovedWithEvent:(NSEvent *)event {
+    NSLog(@"HELLOOOO");
+}
+
+- (void)touchesEndedWithEvent:(NSEvent *)event {
+    NSLog(@"HELLOOOO");
+
+}
+- (void)touchesCancelledWithEvent:(NSEvent *)event {
+    NSLog(@"HELLOOOO");
+}
+
+- (void)pressureChangeWithEvent:(NSEvent *)event {
+    //NSLog(@"Pressure changed");
+}
+
+-(void)mouseDown:(NSEvent *)theEvent {
+    NSLog(@"MouseDown in NSView");
 }
 
 @end
