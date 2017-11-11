@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Leap motion service
-python2 leap/src/main.py&
+cd leap/src && python2 main.py&
 
 # Trackpad service
 # Build
-# cd touchpad/TouchpadDrawing &&  xcodebuild
+# cd touchpad &&  xcodebuild
 # Execute
-./touchpad/TouchpadDrawing/build/Release/TouchpadDrawing&
+./touchpad/build/Release/TouchpadDrawing&
 
 
 # Webserver with canvas
