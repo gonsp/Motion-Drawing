@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E81EDC3E1FB7562900B5993B /* InputDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = E81EDC3D1FB7562900B5993B /* InputDetector.m */; };
 		E8A128D21FB72FAF005F35E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A128D11FB72FAF005F35E7 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E81EDC3C1FB7561500B5993B /* InputDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InputDetector.h; path = TouchpadDrawing/InputDetector/InputDetector.h; sourceTree = SOURCE_ROOT; };
+		E81EDC3D1FB7562900B5993B /* InputDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = InputDetector.m; path = TouchpadDrawing/InputDetector/InputDetector.m; sourceTree = SOURCE_ROOT; };
 		E8A128CE1FB72FAF005F35E7 /* TouchpadDrawing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TouchpadDrawing; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A128D11FB72FAF005F35E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E81EDC3B1FB755B700B5993B /* InputDetector */ = {
+			isa = PBXGroup;
+			children = (
+				E81EDC3C1FB7561500B5993B /* InputDetector.h */,
+				E81EDC3D1FB7562900B5993B /* InputDetector.m */,
+			);
+			path = InputDetector;
+			sourceTree = "<group>";
+		};
 		E8A128C51FB72FAF005F35E7 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +69,7 @@
 		E8A128D01FB72FAF005F35E7 /* TouchpadDrawing */ = {
 			isa = PBXGroup;
 			children = (
+				E81EDC3B1FB755B700B5993B /* InputDetector */,
 				E8A128D11FB72FAF005F35E7 /* main.m */,
 			);
 			path = TouchpadDrawing;
@@ -119,6 +132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81EDC3E1FB7562900B5993B /* InputDetector.m in Sources */,
 				E8A128D21FB72FAF005F35E7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +247,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -241,6 +256,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

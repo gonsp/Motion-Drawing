@@ -63,3 +63,4 @@ typings/
 *.iml
 
 *.pyc
+leap/lib/LeapPython.so
