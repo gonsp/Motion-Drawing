@@ -13,22 +13,20 @@ class SampleListener(Leap.Listener):
     def on_frame(self, controller):
         frame = controller.frame()
         fingers = frame.fingers
+        index = None
         if not fingers.is_empty:
-            F = []
-            for i in list(fingers):
-                F.append(list(i))
+            index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
+            index = index[0]
+            
+
         if frame.id %30 == 0:
-            if not fingers.is_empty:
-                for i in list(fingers):
-                    finger = Leap.Finger(i)
-                    print(finger.tip_position)
-                    print "NUM: %d, Y: %d" % (len(list(fingers)), 0)
+            print(index)
+
 
                 #print(len(list(fingers)))
                 #finger = list(fingers)[0]
                 #print(finger)
-            else:
-                print(len(list(fingers)))
+
 """
     def on_frame(self, controller):
         frame = controller.frame()
