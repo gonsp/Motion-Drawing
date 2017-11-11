@@ -5,4 +5,14 @@ body {
 a {
   color: #00B7FF; }
 
+#settings {
+  display: block;
+  text-align: center; }
+
+#paint {
+  background: #333333;
+  margin-left: auto;
+  margin-right: auto;
+  display: block; }
+
 /*# sourceMappingURL=style.css.map */
