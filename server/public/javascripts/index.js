@@ -60,12 +60,13 @@ var onPaint = function () {
 };
 
 download.addEventListener("click", function () {
-    html2canvas($("#sketch"), {
-        onrendered: function(canvas) {
-            var imgData = canvas.toDataURL('image/png');
-            var doc = new jsPDF();
-            doc.addImage(imgData, 'PNG', 10, 10);
-            doc.save('sketch.pdf');
-        }
-    });
+  html2canvas($("#sketch"),{
+    onrendered:function(canvas){
+        var pdf=new jsPDF("p", "mm", "a4");
+        var width = pdf.internal.pageSize.width;
+        var height = pdf.internal.pageSize.height;
+        pdf.addImage(canvas, 'JPEG', 0, 0,width,height);
+        pdf.save('sketch.pdf');
+    }
+  });
 }, false);
