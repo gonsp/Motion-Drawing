@@ -42,3 +42,14 @@ var onPaint = function () {
     ctx.lineTo(mouse.x, mouse.y);
     ctx.stroke();
 };
+
+download.addEventListener("click", function () {
+    html2canvas($("#sketch"), {
+        onrendered: function(canvas) {
+            var imgData = canvas.toDataURL('image/png');
+            var doc = new jsPDF();
+            doc.addImage(imgData, 'PNG', 10, 10);
+            doc.save('sketch.pdf');
+        }
+    });
+}, false);
