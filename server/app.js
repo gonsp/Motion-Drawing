@@ -55,7 +55,7 @@ app.use(function (err, req, res, next) {
 
 io.on('connection', function (socket) {
     console.log("Client connected");
-    
+
     socket.on('leap-event', function (data) {
         io.emit('leap-event-client', data);
         console.log("LEAP: " + data);
@@ -63,7 +63,7 @@ io.on('connection', function (socket) {
 
     socket.on('trackpad-event', function(data) {
         io.emit('trackpad-event', data);
-        console.log("TRACKPAD: " + data);
+        console.log("TRACKPAD: " + data.x + " " + data.y);
     })
 });
 

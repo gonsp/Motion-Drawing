@@ -37,13 +37,13 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     
     NSURL* url = [[NSURL alloc] initWithString:@"http://127.0.0.1:3000"];
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"compress": @NO}];
+    self.socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"compress": @NO}];
     
-    [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+    [self.socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         NSLog(@"socket connected");
     }];
 
-    [socket connect];
+    [self.socket connect];
 
     // get a list of all multitouch devices
     NSArray *deviceList = (NSArray *)CFBridgingRelease(MTDeviceCreateList());
@@ -69,9 +69,9 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
     int height = kTrackpadHeight;
 
 
+    [self.socket emit:@"trackpad-event" with:@[@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}]];
     
-    
-    //printf("%f,%f,%d,%d\n", x, y, width, height);
+    printf("%f,%f,%d,%d\n", x, y, width, height);
 }
 
 @end
