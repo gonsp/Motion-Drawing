@@ -6,8 +6,7 @@ $(document).ready(function() {
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame ||
         function(callback){ callback() }
-}();
-
+  }();
 
 	$('#fullpage').fullpage({
 		//Navigation
@@ -27,7 +26,7 @@ $(document).ready(function() {
 		autoScrolling: true,
 		fitToSection: true,
 		fitToSectionDelay: 1000,
-		scrollBar: true,
+		scrollBar: false,
 		easing: 'easeInOutCubic',
 		easingcss3: 'ease',
 		loopBottom: false,
@@ -51,7 +50,7 @@ $(document).ready(function() {
 
 		//Accessibility
 		keyboardScrolling: false,
-		animateAnchor: true,
+		animateAnchor: false,
 		recordHistory: true,
 
 		//Design
@@ -80,11 +79,14 @@ $(document).ready(function() {
         var leavingSection = $(this);
         requestAnimFrame(function(){
           $.fn.fullpage.moveTo(nextIndex, parseInt(prevSlide));
+          canScroll = false
           return false;
         });
       }
     },
-		afterLoad: function(anchorLink, index){},
+		afterLoad: function(anchorLink, index){
+      canScroll = true;
+    },
 		afterRender: function(){},
 		afterResize: function(){},
 		afterResponsive: function(isResponsive){},
@@ -95,4 +97,58 @@ $(document).ready(function() {
       canScroll = false;
     }
 	});
+});
+
+// Drawing part
+
+$('.c').each(function() {
+    var ctx = this.getContext('2d')
+    var isDrawing;
+
+    var classes = $(this).attr('class').split(' ');
+
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+
+    if (classes.includes('can-lt-corner')) {
+      $(this).css("margin-left","40px");
+      $(this).css("margin-top","40px");
+    } else if (classes.includes('can-rt-corner')) {
+      this.width -= 70;
+      $(this).css("margin-top","40px");
+    } else if (classes.includes('can-l')) {
+      $(this).css("margin-left","40px");
+    } else if (classes.includes('can-r')) {
+      this.width -= 70;
+    } else if (classes.includes('can-t')) {
+      $(this).css("margin-top","40px");
+    } else if (classes.includes('can-lb-corner')) {
+      $(this).css("margin-left","40px");
+      this.height -= 60;
+      $(this).css("margin-bottom","60px");
+    } else if (classes.includes('can-rb-corner')) {
+      this.width -= 70;
+      this.height -= 60;
+      $(this).css("margin-bottom","60px");
+    } else if (classes.includes('can-b')) {
+      $(this).css("margin-bottom","60px");
+      this.height -= 60;
+    }
+
+    this.onmousedown = function(e) {
+      isDrawing = true;
+      ctx.lineWidth = 10;
+      ctx.lineJoin = ctx.lineCap = 'round';
+      ctx.moveTo(e.clientX, e.clientY);
+    };
+
+    this.onmousemove = function(e) {
+      if (isDrawing) {
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+      }
+    };
+    this.onmouseup = function() {
+      isDrawing = false;
+    };
 });
