@@ -2,7 +2,6 @@ var express = require('express');
 var socketio = require('socket.io');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
 var http = require('http');
@@ -23,7 +22,6 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 app.use(sassMiddleware({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),
@@ -53,8 +51,6 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', function (socket) {
-    console.log("Client connected");
-
     socket.on('leap-event', function (data) {
         io.emit('leap-event-client', data);
         console.log("LEAP: " + data);
