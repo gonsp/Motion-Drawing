@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TouchPoint.h"
+#import "Socket.h"
 
 // header for MultitouchSupport.framework
 #import "MultiTouch.h"
@@ -33,15 +34,15 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 
-  // get a list of all multitouch devices
-  NSArray *deviceList = (NSArray *)CFBridgingRelease(MTDeviceCreateList());
-  for (int i = 0; i < [deviceList count]; i++) {
-    // start sending touches to callback
-    MTDeviceRef device = (__bridge MTDeviceRef)[deviceList objectAtIndex:i];
-    MTRegisterContactFrameCallback(device, touchCallback);
-    MTDeviceStart(device, 0);
-  }
-
+    // get a list of all multitouch devices
+    NSArray *deviceList = (NSArray *)CFBridgingRelease(MTDeviceCreateList());
+    for (int i = 0; i < [deviceList count]; i++) {
+        // start sending touches to callback
+        MTDeviceRef device = (__bridge MTDeviceRef)[deviceList objectAtIndex:i];
+        MTRegisterContactFrameCallback(device, touchCallback);
+        MTDeviceStart(device, 0);
+    }
+    
 }
 
 - (void)didTouchWithPoints:(NSArray *)points {
