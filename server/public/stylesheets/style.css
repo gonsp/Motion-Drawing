@@ -25,4 +25,36 @@ a {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   display: block; }
 
+.container {
+  overflow: hidden;
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  right: 0;
+  width: 260px;
+  height: 190px; }
+
+.box {
+  width: 60px;
+  height: 35px;
+  float: left;
+  background-color: #ccc;
+  margin-bottom: 3px; }
+
+.a-box {
+  transition: background-color 1s ease;
+  background-color: #7e7e7e; }
+
+.spacing {
+  margin-right: 3px; }
+
+.color-pick {
+  text-align: center; }
+
+.jscolor {
+  text-align: center;
+  height: 25px;
+  margin-bottom: 5px;
+  border: 1px solid black; }
+
 /*# sourceMappingURL=style.css.map */
