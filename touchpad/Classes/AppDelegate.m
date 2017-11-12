@@ -36,6 +36,8 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     
+    self.count = 0;
+    
     NSURL* url = [[NSURL alloc] initWithString:@"http://127.0.0.1:3000"];
     self.socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"compress": @NO}];
     
@@ -67,10 +69,12 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
     float y = 1 - [point y];
     int width = kTrackpadWidth;
     int height = kTrackpadHeight;
-
-    [self.socket emit:@"trackpad-event" with:@[@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}]];
     
-    printf("%f,%f,%d,%d\n", x, y, width, height);
+    if(++self.count == 4) {
+        [self.socket emit:@"trackpad-event" with:@[@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}]];
+        printf("%f,%f,%d,%d\n", x, y, width, height);
+        self.count = 0;
+    }
 }
 
 @end

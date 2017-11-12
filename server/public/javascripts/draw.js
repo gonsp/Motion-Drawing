@@ -14,7 +14,7 @@ socket.on('trackpad-event-client', function (data) {
     var next = maybe.find("canvas");
     var ctx = next[0].getContext("2d");
 
-    if(Date.now() - lastTimestamp > 60) {
+    if(Date.now() - lastTimestamp > 120) {
         ctx.closePath();
         ctx.beginPath();
     }

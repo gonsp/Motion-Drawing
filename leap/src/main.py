@@ -23,28 +23,30 @@ class SampleListener(Leap.Listener):
         global is_hand_present
 
         frame = controller.frame()
-        hands = frame.hands
+        fingers = frame.fingers
 
-        if is_hand_present and hands.is_empty:
+        if is_hand_present and fingers.is_empty:
             is_hand_present = False
             socket.emit('hand_detection', {'hand-detected': is_hand_present})
             print "no hand"
 
-        elif not is_hand_present and not hands.is_empty:
+        elif not is_hand_present and not fingers.is_empty:
             is_hand_present = True
             socket.emit('hand_detection', {'hand-detected': is_hand_present})
             print "HAND DETECTED"
 
-        if not hands.is_empty:
-            hand = hands[0]
-            tip_pos = hand.palm_position
+        if not fingers.is_empty:
+            index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
+            index = Leap.Finger(index[0])
+            tip_pos = index.stabilized_tip_position
 
             if not is_calibrated:
                 calibrate(tip_pos)
             else:
-                pos = refresh(tip_pos)
-                print pos
-                socket.emit('leap-event', {'x': pos[0], 'y': pos[1]})
+            	if frame.id % 10 == 0:
+            		pos = refresh(tip_pos)
+                	print pos
+                	socket.emit('leap-event', {'x': pos[0], 'y': pos[1]})
 
 
 def calibrate(pos):

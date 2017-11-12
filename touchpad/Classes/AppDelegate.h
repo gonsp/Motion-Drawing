@@ -12,7 +12,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property SocketIOClient* socket;
-
+@property int count;
 
 - (void)send:() point;
 
