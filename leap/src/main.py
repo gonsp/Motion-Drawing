@@ -1,4 +1,5 @@
 import sys
+from socketIO_client import SocketIO, LoggingNamespace
 
 sys.path.insert(0, "../lib")
 import Leap
@@ -12,6 +13,8 @@ origin = None
 dimension = None
 is_hand_present = False
 
+socket = SocketIO('localhost', 3000, LoggingNamespace)
+
 
 class SampleListener(Leap.Listener):
     def on_connect(self, controller):
@@ -22,26 +25,29 @@ class SampleListener(Leap.Listener):
 
         frame = controller.frame()
         fingers = frame.fingers
-        index = None
-        tip_pos = None
 
         if is_hand_present and fingers.is_empty:
             is_hand_present = False
+            socket.emit('hand_detection', {'hand-detected': is_hand_present})
             print "no hand"
 
         elif not is_hand_present and not fingers.is_empty:
             is_hand_present = True
+            socket.emit('hand_detection', {'hand-detected': is_hand_present})
             print "HAND DETECTED"
 
         if not fingers.is_empty:
             index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
             index = Leap.Finger(index[0])
             tip_pos = index.stabilized_tip_position
+
             if not is_calibrated:
                 calibrate(tip_pos)
             else:
-                pos = refresh(tip_pos)
-                print pos
+                if frame.id % 10 == 0:
+                    pos = refresh(tip_pos)
+                    print pos
+                    socket.emit('leap-event', {'x': pos[0], 'y': pos[1]})
 
 
 def calibrate(pos):
@@ -50,8 +56,9 @@ def calibrate(pos):
     if select.select([sys.stdin, ], [], [], 0.0)[0]:
         sys.stdin.readline()
         corners.append(pos)
-        print "CALIBRATED CORNERS: %i, CORNER %i: X: %i Y: %i" % (len(corners), len(corners), corners[-1][0], corners[-1][1])
-
+        print "CALIBRATED CORNERS: %i, CORNER %i: X: %i Y: %i" % \
+              (len(corners), len(corners), corners[-1][1], -corners[-1][2])
+        socket.emit('calibrated-corners', {'num_corners': len(corners)})
 
     if len(corners) == 4:
         global is_calibrated
@@ -61,22 +68,26 @@ def calibrate(pos):
         origin_x = corners[0][1]
         origin_y = -corners[0][2]
         origin = [origin_x, origin_y]
-        print "ORIGIN X: %i, ORIGIN Y: %s" % (origin[0], origin_y)
+        print "ORIGIN X: %i, ORIGIN Y: %s" % (origin_x, origin_y)
 
         global dimension
-        X = corners[2][1] - origin_x
-        X1 = corners[1][1] - origin_x
+        x_pos = corners[2][1] - origin_x
+        #x1_pos = corners[1][1] - origin_x
 
-        Y = -corners[2][2] - origin_y
-        Y1 = -corners[3][2] - origin_y
-        if abs(X - X1) > 10 or abs(Y - Y1) > 10\
-                :
-            corners = []
-            is_calibrated = False
-            print "RECALIBRATE"
-        else:
-            dimension = [X, Y]
-        print "DIM X: %i, DIM Y: %s" % (X, Y)
+        y_pos = -corners[2][2] - origin_y
+        #y1_pos = -corners[3][2] - origin_y
+        # if abs(x_pos - x1_pos) > 20 or abs(y_pos - y1_pos) > 20:
+        #     corners = []
+        #     is_calibrated = False
+        #     print "RECALIBRATE"
+        #     socket.emit('calibrated-corners', {'num_corners': len(corners)})
+
+
+        dimension = [x_pos, y_pos]
+        #else:
+            #dimension = [(x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0]
+
+            #print "DIM X: %i, DIM Y: %s" % ((x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0)
 
 
 def refresh(tip_pos):
@@ -84,46 +95,9 @@ def refresh(tip_pos):
 
     x = tip_pos[1]
     y = -tip_pos[2]
-    X = max(0, min((x - origin[0]) / dimension[0], 1))
-    Y = max(0, min((y - origin[1]) / dimension[1], 1))
-    return [round(X, 2), round(Y, 2)]
-
-
-"""
-    def on_frame(self, controller):
-        frame = controller.frame()
-        fingers = frame.fingers
-        front_finger = Leap.Finger(fingers.frontmost)
-        foremost = front_finger.joint_position(3)
-        index = fingers.finger_type(Leap.Finger.TYPE_INDEX)
-        if len(index) > 0:
-            index_finger = index[0]
-            x_i = index_finger.x
-            z_i = index_finger.z
-        else:
-            z_i = 0
-        x = foremost.x
-        y = foremost.y
-        z = foremost.z
-
-        if front_finger.type == 0:
-            type = "thumb"
-        elif front_finger.type == 1:
-            type = "index"
-        elif front_finger.type == 2:
-            type = "middle"
-        elif front_finger.type == 3:
-            type = "ring"
-        elif front_finger.type == 4:
-            type = "pinky"
-        else:
-            type = "no finger"
-
-
-        if frame.id %30 == 0:
-            print "Frame id: %d, type: %s, hands: %d, X: %d, Y: %d, Z: %d" % (frame.id, type, len(frame.hands), x, y, z)
-            print "Number: %d, Index z: %d, Z: %d" %(len(fingers), z_i, z)
-"""
+    x_pos = max(0, min((x - origin[0]) / dimension[0], 1))
+    y_pos = max(0, min((y - origin[1]) / dimension[1], 1))
+    return [round(x_pos, 2), round(y_pos, 2)]
 
 
 def main():
