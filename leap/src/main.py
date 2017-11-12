@@ -44,10 +44,9 @@ class SampleListener(Leap.Listener):
             if not is_calibrated:
                 calibrate(tip_pos)
             else:
-                if frame.id % 10 == 0:
-                    pos = refresh(tip_pos)
-                    print pos
-                    socket.emit('leap-event', {'x': pos[0], 'y': pos[1]})
+                pos = refresh(tip_pos)
+                print pos
+                socket.emit('leap-event', {'x': pos[0], 'y': pos[1]})
 
 
 def calibrate(pos):
@@ -105,6 +104,7 @@ def main():
     listener = SampleListener()
     controller = Leap.Controller()
     controller.set_policy(Leap.Controller.POLICY_OPTIMIZE_HMD)
+    controller.set_policy(Leap.Controller.POLICY_BACKGROUND_FRAMES)
 
     # Have the sample listener receive events from the controller
     controller.add_listener(listener)
