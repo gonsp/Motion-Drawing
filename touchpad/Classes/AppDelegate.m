@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TouchPoint.h"
-#import "Socket.h"
+#import "FingerMgmt.h"
 
 // header for MultitouchSupport.framework
 #import "MultiTouch.h"
@@ -42,7 +42,7 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
         MTRegisterContactFrameCallback(device, touchCallback);
         MTDeviceStart(device, 0);
     }
-    
+    printf("Starting finger tracking");
 }
 
 - (void)didTouchWithPoints:(NSArray *)points {
@@ -54,6 +54,9 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
 - (void)send:(TouchPoint*) point {
     float x = [point x];
     float y = 1 - [point y];
+    int width = kTrackpadWidth;
+    int height = kTrackpadHeight;
+    printf("%f,%f,%d,%d\n", x, y, width, height);
 }
 
 @end
