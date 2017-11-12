@@ -9,7 +9,11 @@ socket.on('leap-event-client', function (data) {
 });
 
 socket.on('trackpad-event-client', function (data) {
-    var ctx = specialCanvas.getContext('2d');
+    var dataContext = parseInt(curActiveRow) + 1;
+    var curentRow = $("div[data-anchor="+dataContext+"]");
+    var maybe = curentRow.find(".active");
+    var next = maybe.find("canvas");
+    var ctx = next[0].getContext("2d");
     var screenY = data.y * window.innerHeight;
     var screenX = data.x * window.innerWidth;
     console.log(screenX);
