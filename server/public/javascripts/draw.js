@@ -99,11 +99,22 @@ $(document).ready(function() {
 	});
 });
 
+var canvasContexts = [];
+
 // Drawing part
+
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    for (var i = 0; i < canvasContexts.length; i++) {
+      canvasContexts[i].strokeStyle = '#' + jscolor
+    }
+}
 
 $('.c').each(function() {
     var ctx = this.getContext('2d')
     var isDrawing;
+
+    canvasContexts.push(ctx);
 
     var classes = $(this).attr('class').split(' ');
 
@@ -137,6 +148,7 @@ $('.c').each(function() {
 
     this.onmousedown = function(e) {
       isDrawing = true;
+      ctx.beginPath();
       ctx.lineWidth = 10;
       ctx.lineJoin = ctx.lineCap = 'round';
       ctx.moveTo(e.clientX, e.clientY);
@@ -149,6 +161,7 @@ $('.c').each(function() {
       }
     };
     this.onmouseup = function() {
+      ctx.closePath();
       isDrawing = false;
     };
 });

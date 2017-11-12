@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/javascripts/jquery.fullPage.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css"/>
+    <script src="/javascripts/jscolor.min.js"></script>
 </head>
 <body>
 <img id="pointerImg" src="/images/pointer.png" style="display: block; position:absolute; width: 5%; height: 5%; left: 0; top: 0; z-index: 100000"/>
@@ -37,7 +38,11 @@
         <div class="slide"><canvas class="c can-rb-corner"></canvas></div>
     </div>
 </div>
+
 <div class="container">
+  <div class="color-pick">
+    <input class="jscolor" value="000000" onchange="update(this.jscolor)">
+  </div>
   <div class="box spacing a-box"></div>
   <div class="box spacing"></div>
   <div class="box spacing"></div>
