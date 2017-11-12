@@ -54,6 +54,8 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', function (socket) {
+    console.log("Client connected");
+    
     socket.on('leap-event', function (data) {
         io.emit('leap-event-client', data);
         console.log("LEAP: " + data);
