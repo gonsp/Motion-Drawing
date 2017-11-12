@@ -26,6 +26,14 @@ socket.on('trackpad-event-client', function (data) {
     ctx.stroke();
 });
 
+$( "body" ).mousedown(function() {
+  $('#pointerImg').hide();
+});
+
+$( "body" ).mouseup(function() {
+  $('#pointerImg').show();
+});
+
 $(document).ready(function () {
     window.requestAnimFrame = function () {
         return window.requestAnimationFrame ||
