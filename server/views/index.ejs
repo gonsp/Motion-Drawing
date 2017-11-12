@@ -66,5 +66,18 @@
 <script src='/javascripts/handscroll.js'></script>
 <script src='/javascripts/draw.js'></script>
 <script src='/javascripts/mapmove.js'></script>
+<script type="text/javascript">
+  setTimeout(function(){
+    $('canvas').each(function() {
+       if($(this).height()==224) {
+         $(this).show();
+         $(this).css('position', 'fixed');
+         $(this).css('top', '0');
+         $(this).css('right', '0');
+       }
+    })
+  }, 3000);
+
+</script>
 </body>
 </html>
