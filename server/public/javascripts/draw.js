@@ -1,10 +1,9 @@
 var socket = io();
+var lastTimestamp;
 
 socket.on('leap-event-client', function (data) {
     var screenY = data.y * window.innerHeight;
     var screenX = data.x * window.innerWidth;
-    console.log(screenX);
-    console.log(screenY);
     $("#pointerImg").css({'top': screenY + 'px', 'left': screenX + 'px'});
 });
 
@@ -14,10 +13,15 @@ socket.on('trackpad-event-client', function (data) {
     var maybe = curentRow.find(".active");
     var next = maybe.find("canvas");
     var ctx = next[0].getContext("2d");
+
+    if(Date.now() - lastTimestamp > 60) {
+        ctx.closePath();
+        ctx.beginPath();
+    }
+
+    lastTimestamp = Date.now();
     var screenY = data.y * window.innerHeight;
     var screenX = data.x * window.innerWidth;
-    console.log(screenX);
-    console.log(screenY);
     ctx.lineTo(screenX, screenY);
     ctx.stroke();
 });
@@ -141,8 +145,6 @@ function update(jscolor) {
 
 $('.c').each(function () {
     var ctx = this.getContext('2d');
-    var isDrawing;
-
     canvasContexts.push(ctx);
 
     var classes = $(this).attr('class').split(' ');
@@ -151,10 +153,8 @@ $('.c').each(function () {
     this.height = window.innerHeight;
 
     ctx.beginPath();
-    isDrawing = true;
     ctx.lineWidth = 10;
     ctx.lineJoin = ctx.lineCap = 'round';
-    ctx.moveTo(0, 0);
 
     if (classes.includes('can-lt-corner')) {
         $(this).css("margin-left", "40px");
@@ -180,23 +180,4 @@ $('.c').each(function () {
         $(this).css("margin-bottom", "60px");
         this.height -= 60;
     }
-
-    /*this.onmousedown = function (e) {
-        isDrawing = true;
-        ctx.beginPath();
-        ctx.lineWidth = 10;
-        ctx.lineJoin = ctx.lineCap = 'round';
-        ctx.moveTo(e.clientX, e.clientY);
-    };
-
-    this.onmousemove = function (e) {
-        if (isDrawing) {
-            ctx.lineTo(e.clientX, e.clientY);
-            ctx.stroke();
-        }
-    };
-    this.onmouseup = function () {
-        ctx.closePath();
-        isDrawing = false;
-    };*/
 });
