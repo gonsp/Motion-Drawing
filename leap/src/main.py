@@ -72,19 +72,22 @@ def calibrate(pos):
 
         global dimension
         x_pos = corners[2][1] - origin_x
-        x1_pos = corners[3][1] - origin_x
+        #x1_pos = corners[1][1] - origin_x
 
         y_pos = -corners[2][2] - origin_y
-        y1_pos = -corners[1][2] - origin_y
-        if abs(x_pos - x1_pos) > 10 or abs(y_pos - y1_pos) > 10:
-            corners = []
-            is_calibrated = False
-            print "RECALIBRATE"
-            socket.emit('calibrated-corners', {'num_corners': len(corners)})
+        #y1_pos = -corners[3][2] - origin_y
+        # if abs(x_pos - x1_pos) > 20 or abs(y_pos - y1_pos) > 20:
+        #     corners = []
+        #     is_calibrated = False
+        #     print "RECALIBRATE"
+        #     socket.emit('calibrated-corners', {'num_corners': len(corners)})
 
-        else:
-            dimension = [(x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0]
-            print "DIM X: %i, DIM Y: %s" % ((x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0)
+
+        dimension = [x_pos, y_pos]
+        #else:
+            #dimension = [(x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0]
+
+            #print "DIM X: %i, DIM Y: %s" % ((x_pos + x1_pos) / 2.0, (y_pos + y1_pos) / 2.0)
 
 
 def refresh(tip_pos):
