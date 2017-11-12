@@ -68,7 +68,6 @@ static int touchCallback(int device, mtTouch *data, int num_fingers, double time
     int width = kTrackpadWidth;
     int height = kTrackpadHeight;
 
-
     [self.socket emit:@"trackpad-event" with:@[@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}]];
     
     printf("%f,%f,%d,%d\n", x, y, width, height);

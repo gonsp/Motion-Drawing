@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('trackpad-event', function(data) {
-        io.emit('trackpad-event', data);
+        io.emit('trackpad-event-client', data);
         console.log("TRACKPAD: " + data.x + " " + data.y);
     })
 });
