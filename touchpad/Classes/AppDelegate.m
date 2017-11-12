@@ -13,6 +13,8 @@
 // header for MultitouchSupport.framework
 #import "MultiTouch.h"
 
+@import SocketIO;
+
 static int touchCallback(int device, mtTouch *data, int num_fingers, double timestamp, int frame) {
 
   // create TouchPoint objects for all touches

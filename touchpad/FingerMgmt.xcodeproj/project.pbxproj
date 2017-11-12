@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,53 @@
 		A5BD4D65167BF86100658BE3 /* TouchPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BD4D5F167BF86100658BE3 /* TouchPoint.m */; };
 		A5C08BFE167AC49B003ED945 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C08BFD167AC49B003ED945 /* MultitouchSupport.framework */; };
 		A5F71D13167AA1D600FF0DF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F71D12167AA1D600FF0DF6 /* Cocoa.framework */; };
+		B889211D1FB7F2830069E0B6 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88921161FB7F20D0069E0B6 /* SocketIO.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B88921111FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2191B51F16C00EEBB58;
+			remoteInfo = "SocketIO-iOS";
+		};
+		B88921131FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2241B51F16C00EEBB58;
+			remoteInfo = "SocketIO-iOSTests";
+		};
+		B88921151FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2381B51F18A00EEBB58;
+			remoteInfo = "SocketIO-Mac";
+		};
+		B88921171FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 572EF2421B51F18A00EEBB58;
+			remoteInfo = "SocketIO-MacTests";
+		};
+		B88921191FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57634A161BD9B46A00E19CD7;
+			remoteInfo = "SocketIO-tvOS";
+		};
+		B889211B1FB7F20D0069E0B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57634A3B1BD9B46D00E19CD7;
+			remoteInfo = "SocketIO-tvOSTests";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A5C4314A168319BC000EC677 /* CopyFiles */ = {
@@ -44,6 +90,7 @@
 		A5F71D12167AA1D600FF0DF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A5F71D15167AA1D600FF0DF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A5F71D17167AA1D600FF0DF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Socket.IO-Client-Swift.xcodeproj"; path = "../../../Downloads/socket.io-client-swift-9.0.1/Socket.IO-Client-Swift.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +100,7 @@
 			files = (
 				A5C08BFE167AC49B003ED945 /* MultitouchSupport.framework in Frameworks */,
 				A5F71D13167AA1D600FF0DF6 /* Cocoa.framework in Frameworks */,
+				B889211D1FB7F2830069E0B6 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +121,7 @@
 		A5F71D03167AA1D600FF0DF6 = {
 			isa = PBXGroup;
 			children = (
+				B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */,
 				A5F71D18167AA1D600FF0DF6 /* FingerMgmt */,
 				A5F71D11167AA1D600FF0DF6 /* Frameworks */,
 				A5F71D0F167AA1D600FF0DF6 /* Products */,
@@ -121,6 +170,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B88921091FB7F20D0069E0B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B88921121FB7F20D0069E0B6 /* SocketIO.framework */,
+				B88921141FB7F20D0069E0B6 /* SocketIO-iOSTests.xctest */,
+				B88921161FB7F20D0069E0B6 /* SocketIO.framework */,
+				B88921181FB7F20D0069E0B6 /* SocketIO-MacTests.xctest */,
+				B889211A1FB7F20D0069E0B6 /* SocketIO.framework */,
+				B889211C1FB7F20D0069E0B6 /* SocketIO-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,7 +214,7 @@
 				ORGANIZATIONNAME = "FFFF00 Agents AB";
 			};
 			buildConfigurationList = A5F71D08167AA1D600FF0DF6 /* Build configuration list for PBXProject "FingerMgmt" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -161,12 +223,63 @@
 			mainGroup = A5F71D03167AA1D600FF0DF6;
 			productRefGroup = A5F71D0F167AA1D600FF0DF6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B88921091FB7F20D0069E0B6 /* Products */;
+					ProjectRef = B88921081FB7F20D0069E0B6 /* Socket.IO-Client-Swift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A5F71D0D167AA1D600FF0DF6 /* FingerMgmt */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B88921121FB7F20D0069E0B6 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = B88921111FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B88921141FB7F20D0069E0B6 /* SocketIO-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-iOSTests.xctest";
+			remoteRef = B88921131FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B88921161FB7F20D0069E0B6 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = B88921151FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B88921181FB7F20D0069E0B6 /* SocketIO-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-MacTests.xctest";
+			remoteRef = B88921171FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B889211A1FB7F20D0069E0B6 /* SocketIO.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketIO.framework;
+			remoteRef = B88921191FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B889211C1FB7F20D0069E0B6 /* SocketIO-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketIO-tvOSTests.xctest";
+			remoteRef = B889211B1FB7F20D0069E0B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A5F71D0C167AA1D600FF0DF6 /* Resources */ = {
@@ -217,7 +330,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -241,7 +354,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -249,6 +362,9 @@
 		A5F71D2D167AA1D600FF0DF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -260,7 +376,7 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -269,6 +385,9 @@
 		A5F71D2E167AA1D600FF0DF6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -280,7 +399,7 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
