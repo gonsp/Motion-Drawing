@@ -71,9 +71,11 @@
     $('canvas').each(function() {
        if($(this).height()==224) {
          $(this).show();
+         $(this).css('height', '200');
          $(this).css('position', 'fixed');
          $(this).css('top', '0');
          $(this).css('right', '0');
+         $(this).css('opacity', '0.9');
        }
     })
   }, 3000);
