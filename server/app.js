@@ -56,8 +56,13 @@ app.use(function (err, req, res, next) {
 io.on('connection', function (socket) {
     socket.on('leap-event', function (data) {
         io.emit('leap-event-client', data);
-        console.log(data);
+        console.log("LEAP: " + data);
     });
+
+    socket.on('trackpad-event', function(data) {
+        io.emit('trackpad-event', data);
+        console.log("TRACKPAD: " + data);
+    })
 });
 
 module.exports = app;
