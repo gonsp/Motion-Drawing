@@ -2,6 +2,11 @@ var socket = io();
 var lastTimestamp;
 
 socket.on('leap-event-client', function (data) {
+    if (Date.now() - lastTimestamp > 120) {
+        $('#pointerImg').show();
+    } else {
+        $('#pointerImg').hide();
+    }
     var screenY = data.y * window.innerHeight;
     var screenX = data.x * window.innerWidth;
     $("#pointerImg").css({'top': screenY + 'px', 'left': screenX + 'px'});
@@ -9,12 +14,12 @@ socket.on('leap-event-client', function (data) {
 
 socket.on('trackpad-event-client', function (data) {
     var dataContext = parseInt(curActiveRow) + 1;
-    var curentRow = $("div[data-anchor="+dataContext+"]");
+    var curentRow = $("div[data-anchor=" + dataContext + "]");
     var maybe = curentRow.find(".active");
     var next = maybe.find("canvas");
     var ctx = next[0].getContext("2d");
 
-    if(Date.now() - lastTimestamp > 120) {
+    if (Date.now() - lastTimestamp > 120) {
         ctx.closePath();
         ctx.beginPath();
     }
@@ -24,14 +29,6 @@ socket.on('trackpad-event-client', function (data) {
     var screenX = data.x * window.innerWidth;
     ctx.lineTo(screenX, screenY);
     ctx.stroke();
-});
-
-$( "body" ).mousedown(function() {
-  $('#pointerImg').hide();
-});
-
-$( "body" ).mouseup(function() {
-  $('#pointerImg').show();
 });
 
 $(document).ready(function () {
